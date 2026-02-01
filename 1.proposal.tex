@@ -1,0 +1,325 @@
+\documentclass[11pt,twoside,a4paper]{article}
+
+% ===================== Packages =====================
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+
+% Optional but recommended for better page fit (uncomment if you want)
+% \usepackage[margin=1in]{geometry}
+
+% ===================== Report Metadata =====================
+\newcommand{\reporttitle}{Proposal: NoScroll Digital Learning App}
+\newcommand{\reportauthorOne}{Rojas Alessandro Rafael Doronila}
+\newcommand{\cidOne}{2402962}
+\newcommand{\reportauthorTwo}{Yap Hong Xiang Alfred}
+\newcommand{\cidTwo}{2401438}
+\newcommand{\reportauthorThree}{Nathaniel Liong}
+\newcommand{\cidThree}{2400530}
+\newcommand{\reportauthorFour}{Chew E Jae Justin}
+\newcommand{\cidFour}{2400851}
+\newcommand{\reportauthorFive}{Nicholas Tay Kai Yuan}
+\newcommand{\cidFive}{2400736}
+\newcommand{\reporttype}{Coursework}
+
+\bibliographystyle{plain}
+
+% If these files exist in your folder, keep them.
+% If they don't, comment them out.
+\input{includes}
+\input{notation}
+
+% ===================== Helper Layout =====================
+% Reduce spacing from sections
+\titlespacing*{\section}
+{0pt}      % left margin
+{2.4ex}    % space before section
+{1.6ex}    % space after section
+
+\titlespacing*{\subsection}
+{0pt}
+{2.0ex}
+{1.2ex}
+
+\titlespacing*{\subsubsection}
+{0pt}
+{1.6ex}
+{0.8ex}
+
+
+% Side-by-side image + list using minipages (safe; no & or \\ issues)
+\newcommand{\appendixFigureWithList}[3]{%
+\begin{figure}[H]
+  \centering
+  \begin{minipage}[t]{0.58\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{#1}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.38\textwidth}
+    #2
+  \end{minipage}
+  \caption{#3}
+\end{figure}
+}
+
+\begin{document}
+
+% ===================== Front Page =====================
+\input{titlepage}
+
+% ===================== Table of Contents =====================
+% \tableofcontents
+% \newpage
+
+% ===================== Main Document =====================
+\section{Project Idea and Motivation}
+
+\subsection{Project Overview}
+NoScroll is a native Android productivity and digital well-being application that helps college students maintain long-term study motivation while reducing distractions from short-form entertainment platforms such as YouTube Shorts, Instagram Reels, and TikTok. The application expands on experimental results, behavioural insights, and verified design principles from the INF2002 Human Computer Interaction project, which identified student pain points including burnout, procrastination, and attention fragmentation.
+
+Unlike traditional timers or app-blockers, NoScroll integrates social responsibility, positive reward, and behavioural constraint into a single user experience. Appendix A provides a graphic summary of the intended user journey, while Appendix B shows the low-fidelity UI prototype. 
+
+\subsection{Motivation and Inspiration}
+The need-finding, usability testing, and controlled experiments conducted in INF2002 informed the development of NoScroll. Across these studies, two recurring needs were identified:
+\begin{itemize}[noitemsep, topsep=0pt]
+  \item non-intrusive motivational mechanisms that encourage sustained engagement without becoming distractions themselves; and
+  \item interventions that prevent distractions before they occur rather than relying purely on self-discipline.
+\end{itemize}
+
+Existing focus applications often fail because they depend primarily on rigid blocking or willpower. Meanwhile, highly gamified solutions can introduce visual noise that harms attention. INF2002 findings suggest that carefully managed gamification, combined with constraint-based focus modes, can improve attention while limiting cognitive burden. Recent advances in mobile computing, background services, and on-device AI further enable adaptive and personalised focus systems capable of meeting these needs.
+
+\subsection{Societal and Individual Impact}
+At an individual level, NoScroll aims to help students sustain attention during study sessions, reduce anxiety caused by unstructured workloads, and build healthier digital habits through positive reinforcement rather than strict restriction. At a broader social level, the application seeks to improve academic outcomes, reduce student fatigue, and promote awareness of digital overconsumption and the attention economy.
+
+Importantly, NoScroll frames distraction as a behavioural challenge shaped by digital environments rather than a moral failing. This perspective supports long-term habit-building over short-term productivity fixes by making distraction management systematic and rewarding.
+
+\subsection{User Stories and Acceptance Criteria}
+
+The user stories and acceptance criteria for \textit{NoScroll} were derived from an iterative design and analysis process based on our high-fidelity prototype. Rather than idealising design process where the requirements are derived in a vague, abstract sense, our design process simulated interactions between users and the application to determine fundamental needs.
+
+We first analyse the primary user flow based on the high-fidelity prototype, then we ask for their experience while interacting with the prototype, and finally tune them into stories. This includes account creation, setting up study sessions, staying focused and minimising distractions during study sessions, and rewards and feedback after a session. We also identified other crucial functions that can be applied to our prototype in order to further motivate user and provide a more personalised, engaging experience over time. These functions such as QR code QR code-based friend addition and persistent data storage are further explained in Section 3
+
+To ensure clarity and testability, we included acceptance criteria for each user story which states the conditions for the completion of the development of the feature as a mean of measuring our development to keep things in line with the user stories and design of our prototype.
+
+The complete set of user stories and acceptance criteria, including both core and extended feature requirements, is provided in Appendix C.
+
+\subsection{Initial Software Architecture Diagram}
+The initial software architecture uses a three-layer structure:
+\begin{itemize}[noitemsep, topsep=0pt]
+  \item \textbf{Presentation Layer:} the mobile UI screens where users interact with NoScroll.
+  \item \textbf{Domain Layer:} the core components and business logic powering features such as authentication, study sessions, rewards/pets, social features/leaderboards, and navigation.
+  \item \textbf{Data Layer:} persistence and storage for user accounts, sessions, friends, leaderboards, inventory, and pets.
+\end{itemize}
+This separation improves maintainability by keeping UI, logic, and data concerns independent.
+Please refer to Appendix D for the initial software architecture diagram.
+
+% ==========================================================
+\section{Review of Similar Works}
+To position the proposed application \textit{NoScroll}, we reviewed existing focus and productivity tools that address digital distraction, habit formation, and study motivation. While these solutions each cover parts of the problem, many do so in isolation and lack an integrated workflow combining distraction reduction, progress reinforcement, and peer accountability specifically for students. \textit{NoScroll} Aims to address this gap by integrating distraction prevention, structured academic workflows, and sustainable motivation in one application designed specifically for student learning contexts. Details of the productivity tools reviewed \textbf{(Forest, Freedom, and Habitica)} can be found in Appendix E
+
+% ==========================================================
+\section{Implementation of Key Aspects}
+From five key aspects of mobile application development—Mobile Sensors, Mobile Communication, Mobile Multimedia, Mobile Computing, and Mobile AI—we selected Mobile Communication, Mobile Multimedia, and Mobile Computing for integration into NoScroll to enhance functionality and user experience.
+
+\subsection{Mobile Communication}
+Mobile Communication is implemented through a QR code--based friend-adding system that allows users to connect quickly without manual searching or typing. Once connected, users can share selected study-related data such as study duration and progress. This supports accountability and social motivation through shared visibility and friendly comparison.
+
+\subsection{Mobile Multimedia}
+Mobile Multimedia is incorporated through graphical data visualisations that present study progress, session completion, and achievements in an intuitive format. Audio and haptic feedback reinforce key interactions such as starting or completing a session. These multimedia features provide immediate feedback and a sense of accomplishment without introducing unnecessary visual distraction.
+
+\subsection{Mobile Computing}
+Mobile Computing is implemented using cloud-based data storage and synchronisation via Firebase. User data—including sessions, progress, rewards, and social connections—is stored securely and synchronised in real time across devices. This supports persistence, scalability, and efficient processing of user activity, ensuring a seamless experience when switching devices or resuming study later.
+
+% ==========================================================
+\section{Development Milestones}
+Following finalisation of the User Stories and Acceptance Criteria, the team established a structured plan spanning Week 1 to Week 13 of the trimester. This plan ensures steady progress across core features while aligning with sprint milestones and submission deadlines.
+
+\subsection{EPIC-Based Planning}
+To manage scope and complexity, the product backlog is organised into four EPICs:
+\begin{itemize}[noitemsep, topsep=0pt]
+  \item EPIC 1: User Account and Personalisation
+  \item EPIC 2: Study Session Management
+  \item EPIC 3: Gamification via In-App Rewards
+  \item EPIC 4: Socialisation and Leaderboards
+\end{itemize}
+This structure distributes work logically across sprints while keeping dependencies and ownership clear.
+
+\subsection{Week-by-Week Execution Plan}
+Development follows an iterative sprint-based approach. Early weeks focus on requirements analysis, UI prototyping, and architectural design, followed by incremental implementation and refinement across three sprints. Final weeks are dedicated to integration, testing, bug fixing, and preparation for submission. Each sprint concludes with a review and backlog adjustment to maintain alignment with goals and technical constraints.
+
+A detailed week-by-week breakdown is visualised using a Gantt chart mapping EPIC-level activities across the trimester. Refer to Appendix C for the Development Milestone Gantt Chart.
+
+% ==========================================================
+\newpage
+\section*{Appendix}
+\addcontentsline{toc}{section}{Appendix}
+
+\subsection*{Appendix A: Tom’s Study Session}
+\addcontentsline{toc}{subsection}{Appendix A: Tom’s Study Session}
+
+% Table 1 (Steps 1-4)
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|m{1cm}|m{6.2cm}|m{8.2cm}|}
+\hline
+\textbf{Step} & \textbf{Storyboard Image} & \textbf{Description} \\
+\hline
+1 & \includegraphics[width=6.2cm]{storyboard1.png} & Today is a fair Thursday, and Tom has just finished his Mobile Development class. \\
+\hline
+2 & \includegraphics[width=6.2cm]{storyboard2.png} & To keep the momentum going, Tom heads straight to the library to study for an upcoming quiz. \\
+\hline
+3 & \includegraphics[width=6.2cm]{storyboard3.png} & Tom plans his study objective, launches the app, and starts his study session. \\
+\hline
+4 & \includegraphics[width=6.2cm]{storyboard4.png} & After 20 minutes, Tom hears a phone notification, but the app reminds him that his study session is still ongoing with a motivational message. \\
+\hline
+\end{tabular}
+\end{table}
+
+% Table 2 (Steps 5-8)
+\begin{table}[H]
+\centering
+\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{|m{1cm}|m{6.2cm}|m{8.2cm}|}
+\hline
+\textbf{Step} & \textbf{Storyboard Image} & \textbf{Description} \\
+\hline
+5 & \includegraphics[width=6.2cm]{storyboard5.png} & Tom continues studying, but curiosity slowly gets the better of him. \\
+\hline
+6 & \includegraphics[width=6.2cm]{storyboard6.png} & Tom attempts to open TikTok, but the app redirects him back to the focus timer with a reminder to stay focused. \\
+\hline
+7 & \includegraphics[width=6.2cm]{storyboard7.png} & Initially confused, Tom realises he is being distracted and returns to studying. \\
+\hline
+8 & \includegraphics[width=6.2cm]{storyboard8.png} & When the timer ends, Tom takes a break and feels rewarded as he sees his virtual pets growing. \\
+\hline
+\end{tabular}
+\caption{Storyboard illustrating Tom’s study session using the focus timer application}
+\end{table}
+
+\appendix
+\subsection*{Appendix B: Low-Fidelity UI Prototype}
+\addcontentsline{toc}{subsection}{Appendix B: Low-Fidelity UI Prototype}
+
+% Part 1
+\subsubsection*{Part 1: Onboarding and Core Study Session Flow}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{LowFiPrototypepart1.png}
+\caption{Low-fidelity prototype (Part 1): onboarding and core study session flow.}
+\end{figure}
+
+\begin{enumerate}
+  \item Register: Users can create an account.
+  \item Login: Users can log into their existing account.
+  \item Home: The main page of the app, featuring the profile page and selected pet.
+  \item Settings: Users can change their details.
+  \item New Study Session: Users set what they want to study and for how long.
+  \item Timer: Once a study session starts, only the timer is shown.
+    \begin{enumerate}
+      \item Auto-Lock: Minimise interaction so users can focus on studying.
+      \item Update: Abort and Edit buttons added if session details must change.
+      \item Storyboard Reference: Page 3 (user starts studying).
+    \end{enumerate}
+\end{enumerate}
+
+% Part 2
+\subsubsection*{Part 2: Intervention, Rewards, and Social Features}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{LowFiPrototypepart2.png}
+\caption{Low-fidelity prototype (Part 2): intervention, rewards, and social features.}
+\end{figure}
+
+\begin{enumerate}\setcounter{enumi}{6}
+  \item Phone: The user's home screen for app blocking.
+  \item Blocked: Users are redirected back to the app to avoid distraction.
+    \begin{enumerate}
+      \item App Intervention: Prevent access to non-productive apps.
+      \item Storyboard Reference: Page 7 (user realises they should be studying).
+    \end{enumerate}
+  \item Time Up: Displayed after completing a study session.
+    \begin{enumerate}
+      \item Gamification: Rewards with items to interact with pets.
+      \item Storyboard Reference: Page 8 (user feels rewarded).
+    \end{enumerate}
+  \item Leaderboard: Users view leaderboard among all users.
+  \item Friend: Users view leaderboard among friends.
+  \item Friend Request: Users can add friends to see their progression.
+\end{enumerate}
+
+% Part 3
+\subsubsection*{Part 3: Pet Collection and Progression}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{LowFiPrototypepart3.png}
+\caption{Low-fidelity prototype (Part 3): pet collection and progression.}
+\end{figure}
+
+\begin{enumerate}\setcounter{enumi}{12}
+  \item Pets: Users can view the pets they own.
+  \item Pet Interaction: Learn more about the selected pet.
+  \item Evolve: Displayed after evolving a pet.
+  \item Gacha: Users can obtain a new pet via random gacha.
+  \item Rates: Users can view chances to obtain pet varieties.
+  \item Obtain Pet: The pet obtained from gacha.
+\end{enumerate}
+
+\newpage
+\subsection*{Appendix C: Sprint Backlog and Gantt Chart}
+\addcontentsline{toc}{subsection}{Appendix C: Sprint Backlog and Gantt Chart}
+
+\noindent
+\href{https://sitsingaporetechedu-my.sharepoint.com/:x:/r/personal/2400736_sit_singaporetech_edu_sg/_layouts/15/Doc.aspx?sourcedoc=%7BA8174FBF-CAA4-43D0-8FF9-C912CD14772F%7D&file=Mobile%20Product%20Sprint%20Backlog.xlsx&action=default&mobileredirect=true}
+{Mobile Product Sprint Backlog + Gantt Chart (Excel) Link}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{ProductSprintBacklog.png}
+\caption{Sprint backlog overview.}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{GanttChart.png}
+\caption{Gantt chart for development milestones.}
+\end{figure}
+
+\subsection*{Appendix D: Initial Software Architecture Diagram}
+\addcontentsline{toc}{subsection}{Appendix D: Initial Software Architecture Diagram}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{SoftwareArchitectureDiagram.png}
+\caption{Initial software architecture diagram for NoScroll.}
+\end{figure}
+
+\subsection*{Appendix E: List of Existing Work}
+\addcontentsline{toc}{subsection}{Appendix E: List of Existing Work}
+
+\subsubsection*{Forest}
+Forest is a productivity application that reduces phone use using a focus timer concept where users ``plant a tree'' that grows during a study session, encouraging them to remain focused and avoid distractions \cite{forestapp}. This aligns with our aim of maintaining attention during planned study periods. However, Forest primarily functions as a timer-based commitment tool and provides limited support for deeper academic workflows such as task organisation, study planning, and identifying learning gaps.
+
+Forest also does not directly address short-form content consumption patterns (e.g., doomscrolling), which emerged as a major pain point in our user stories. In contrast, \textit{NoScroll} goes beyond a timer by integrating study planning, progress tracking, and lightweight gamified incentives, as well as contextual features such as curated study resources. This supports both constraint-based focus and long-term learning reinforcement.
+
+\subsubsection*{Freedom}
+Freedom is a cross-platform distraction-blocking tool that restricts access to selected websites and applications to improve productivity \cite{freedom}. Its robust restriction controls and multi-device support align with our goal of minimising distractions during lectures or study sessions. However, Freedom adopts a restriction-first approach and does not provide incentives, reflection mechanisms, or study-oriented progress monitoring. As a result, sustained behaviour change may be difficult once restrictions are removed.
+
+\textit{NoScroll} combines constraints with positive reinforcement by offering progress visibility, task completion feedback, and peer-based study elements, shifting the experience from pure enforcement to habit building.
+
+\subsubsection*{Habitica}
+Habitica gamifies productivity by turning real-world tasks into role-playing game (RPG) progress, rewarding users for completing routines and goals \cite{habitica}. This relates to our goal of sustaining motivation through progress tracking and accomplishment. However, Habitica’s highly engaging game mechanics may distract students who are trying to focus. It also lacks built-in study verification methods such as quiz-based self-testing and does not explicitly target academic distraction triggers like short-form media usage during study sessions.
+
+Gamification in \textit{NoScroll} is designed to be \textbf{supportive and minimal}, with rewards placed outside focus mode to avoid attention hijacking. NoScroll also integrates academic supports such as curated resources and quizzes aligned with student learning goals rather than general habit tracking.
+
+\newpage
+\bibliography{mybib}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
